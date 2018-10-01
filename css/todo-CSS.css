@@ -1,0 +1,54 @@
+body{
+font-family: roboto;
+background: #1A2980;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #26D0CE, #1A2980);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #26D0CE, #1A2980); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#container{margin:10% auto;
+	width:350px;
+	box-shadow: 0px 0px 6px rgba(0,0,0, 0.1);}
+
+.header{background-color: #1A2980;
+	color:white;
+	padding:10px 20px;
+	position: relative;}
+.header h1{margin:0px;
+	font-size: 24px;
+	font-weight: 400;}
+.fa-plus,.header .fa-trash{margin-left:15px;cursor:pointer;float:right}
+
+/*Checked class to toggle when list item is clicked*/
+.checked{text-decoration: line-through;color:gray;}
+input[type="text"]{
+	width: 100%;
+	border:none;
+	outline:none;
+	background-color: #ddd;
+	color:#1A2980;
+	box-sizing: border-box;
+	padding-left: 15px;
+	height: 40px;
+	font-size: 18px;
+	transition: all ease 0.4s}
+input:focus{height:50px;border-bottom:1px solid #ddd;}
+
+ul{list-style: none;padding: 0;margin:0;}
+li{background-color: white;
+	transition:all ease 0.4s;
+	overflow: hidden;
+	line-height: 30px}
+li:nth-of-type(even){background-color: #ddd;}
+
+#todoUl li .fa-trash{cursor:pointer;
+	background-color: #d41515;
+	color:white;
+	padding:10px 12px;
+	transition:all ease 0.4s;
+	position: relative;
+	margin-left:-20px;
+	opacity: 0;
+	line-height: 30px }
+
+#todoUl li:hover .fa-trash{margin:0;opacity: 1}
+
