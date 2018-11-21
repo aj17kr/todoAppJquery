@@ -9,15 +9,12 @@ function loadAllTodos(){
 	if(localStorage.getItem('todos')===null){
 		localStorage.setItem('todos',JSON.stringify([]));
 	}
-		
     const todos=JSON.parse(localStorage.getItem('todos'));
-    if(todos.length !== 0 ){
     	console.log("Loading todos from localStorage....")
         todos.forEach((item)=>{
         //Calling addLi function to add all todos from localStorage.
-        $("#todoUl").append("<li> <span class='fa fa-trash'></span> " + item + "</li>");
+        $("#todoUl").append(`<li><span class='fa fa-trash'></span>${item}</li>`);
         });
-	}
 }
 
 
@@ -31,7 +28,7 @@ $(input).on("keypress",function(event){
 	saveTodoLocalStorage(todoText);
 
 	/*Create an new li and add to ul */
-	$("#todoUl").append("<li> <span class='fa fa-trash'></span> " + todoText + "</li>");
+	$("#todoUl").append(`<li><span class='fa fa-trash'></span>${todoText}</li>`);
 	//Erasing input value after enter button.
 	this.value="";
 	}
@@ -39,21 +36,19 @@ $(input).on("keypress",function(event){
 
 // ========saveTodoLocally function=========== //
 function saveTodoLocalStorage(val){
-
- // let todosArr;
- const todos=JSON.parse(localStorage.getItem('todos'));
- // if(todos.length === 0){
- //     todosArr=[];
- // }
- // else{
-     // let todosArr=todos;
- // }
- todos.push(val);
- localStorage.setItem("todos",JSON.stringify(todos));
+let tasksArr;
+ if(JSON.parse(localStorage.getItem("todos")) === null){
+     tasksArr=[];
+ }
+ else{
+     tasksArr=JSON.parse(localStorage.getItem("todos"));
+ }
+ tasksArr.push(val);
+ localStorage.setItem("todos",JSON.stringify(tasksArr));
 }
 
 
-/*Clickimg plus button to focus to input type text*/
+/*Clicking plus button to focus to input type text*/
 $(".fa-plus").on("click",function(){
 	$("input[type='text']").fadeToggle();
 });
@@ -70,40 +65,42 @@ $("ul").on("click",".fa-trash",function(event){
 		$(this).remove();
 	});
 	console.log("Deleting...",event.target.parentElement.innerText);
-	deleteTodoLocalStorage(event.target.parentElement.innerText);
+	deleteTodoLocalStorage(event.target.parentElement.textContent);
 	event.stopPropagation();
 });
 
 
-// JavaScript only method for clearing todos inside local storage
-// let deleteThe=document.getElementById("todoUl");
-// deleteThe.addEventListener('click',(e)=>{
-// 	console.log(e.target.classList.contains('fa-trash'));
-// 	if(e.target.classList.contains('fa-trash')){
-// 		console.log('Got it',e.target.parentElement.innerText);
-// 		deleteTodoLocalStorage(e.target.parentElement.innerText);
-// 	}
-// })
-
-
 // Delete todos from local Storage.
 function deleteTodoLocalStorage(deleteTodo){
-	// let todosArray;
-	const todos=JSON.parse(localStorage.getItem('todos'));
-	// if(todos.length !== 0){
-		todosArray=todos;
-	// }
+	let todos;
+    if(localStorage.getItem('todos') ===null ){
+        todos=[];
+    }
+    else{
+        todos=JSON.parse(localStorage.getItem('todos'));
+    }
 
 	// Finding todo value to be deleted inisde by searching inside todosArray var using splice method.
-	for(var prop in todos){
-	  // console.log("Before",todosArray);
-	  if(todos[prop]===deleteTodo){
-	    todos.splice(prop,1)
-	    // console.log("After",todosArray);
-	  	localStorage.setItem('todos',JSON.stringify(todos));
-	    break;
-	  }
-	}
+
+	// Using For in loop
+	// for(var prop in todos){
+	//   console.log("Before",todosArray);
+	//   if(todos[prop]===deleteTodo){
+	//     todos.splice(prop,1)
+	//     console.log("After",todosArray);
+	//   	localStorage.setItem('todos',JSON.stringify(todos));
+	//     break;
+	//   }
+	// }
+
+	// Using For loop
+	for(var i=0;i<=todos.length;i++){
+    	if(deleteTodo===todos[i]){
+        todos.splice(i,1);
+        localStorage.setItem('todos',JSON.stringify(todos));
+        break;
+        }
+    }
 }
 
 /* Delete all todos */
