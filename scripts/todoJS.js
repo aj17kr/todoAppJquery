@@ -24,7 +24,7 @@ $(input).on("keypress",function(event){
 		
 	let todoText=this.value;
 	//Calling saveTodoLocally function to save todo list in localStorage
-	console.log('inserting...',todoText);
+	// console.log('inserting...',todoText);
 	saveTodoLocalStorage(todoText);
 
 	/*Create an new li and add to ul */
@@ -64,7 +64,7 @@ $("ul").on("click",".fa-trash",function(event){
 	$(this).parent("li").fadeOut(function(){
 		$(this).remove();
 	});
-	console.log("Deleting...",event.target.parentElement.innerText);
+	// console.log("Deleting...",event.target.parentElement.innerText);
 	deleteTodoLocalStorage(event.target.parentElement.textContent);
 	event.stopPropagation();
 });
@@ -80,14 +80,12 @@ function deleteTodoLocalStorage(deleteTodo){
         todos=JSON.parse(localStorage.getItem('todos'));
     }
 
-	// Finding todo value to be deleted inisde by searching inside todosArray var using splice method.
+	// Finding todo value to be deleted using splice method searching inside todos .
 
 	// Using For in loop
 	// for(var prop in todos){
-	//   console.log("Before",todosArray);
 	//   if(todos[prop]===deleteTodo){
 	//     todos.splice(prop,1)
-	//     console.log("After",todosArray);
 	//   	localStorage.setItem('todos',JSON.stringify(todos));
 	//     break;
 	//   }
